@@ -1,0 +1,47 @@
+{% extends './base.html' %}
+{% block content %}
+    <div class="container h-fluid-wrapper">
+        <div class="row h-100 justify-content-center align-items-center">
+            <div class="col-6">
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    {{ formset.management_form }}
+                    <div class="form-group">
+                        {% if form.question.errors %}
+                            <label for="" class="form-text">Type your question here...</label>
+                            <input type="text" name="{{ form.question.html_name }}" class="form-control is-invalid" value="{{ form.question.value|default_if_none:'' }}">
+                            {% for error in form.question.errors %}
+                                <div class="error mt-2">{{ error }}</div>
+                            {% endfor %}
+                        {% else %}
+                            <label for="" class="form-text">Type your question here...</label>
+                            <input type="text" name="{{ form.question.html_name }}" class="form-control" value="{{ form.question.value|default_if_none:'' }}">
+                        {% endif %}
+                    </div>
+                    <div class="col-12 px-0">
+                        {% for form in formset %}
+                            {{form.id}}
+                            <div class="row formset_row">
+                                <div class="col-8">
+                                    <div class="form-group">
+                                        {% if form.errors %}
+                                            {{ form.DELETE }}
+                                            <input type="text" name="{{form.text.html_name}}" placeholder="Choice" class="form-control is-invalid" value="{{ form.text.value|default_if_none:'' }}">
+                                            {% for error in form.errors.id %}
+                                                <div class="error mt-2">{{ error }}</div>
+                                            {% endfor %}
+                                        {% else %}
+                                            {{ form.DELETE }}
+                                            <input type="text" name="{{form.text.html_name}}" placeholder="Choice" class="form-control" value="{{ form.text.value|default_if_none:'' }}">
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <button type="submit" class=" btn btn-block btn-outline-dark mt-4">Create MCQ Field</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

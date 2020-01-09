@@ -1,0 +1,25 @@
+{% extends './base.html' %}
+{% block content %}
+    <div class="container d-flex flex-column justify-content-center align-items-center h-fluid-wrapper">
+        <div class="row">
+            <div class="col-12">
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        {% if form.title.errors %}
+                            <label for="" class="form-text">Enter Typeform Name</label>
+                            <input type="text" name="{{ form.title.html_name }}" class="form-control is-invalid">
+                            {% for error in form.title.errors %}
+                                <div class="error mt-2">{{ error }}</div>
+                            {% endfor %}
+                        {% else %}
+                            <label for="" class="form-text">Enter Typeform Name</label>
+                            <input type="text" name="{{ form.title.html_name }}" class="form-control">
+                        {% endif %}
+                    </div>
+                    <button type="submit" class=" btn btn-block btn-outline-primary">Create Typeform</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends './base.html' %}
+{% block content %}
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-6">
+                {% for response in responses %}
+                    <a href="{% url 'response_view' form_id=form.pk id=response.pk %}">
+                        <div class="field col-12 mb-3 py-3 px-5">Response submitted on {{ response.submitted_on }}</div>
+                    </a>
+                {% endfor %}
+                <a href="{% url 'response_download' id=form.pk %}" class="btn btn-block btn-outline-dark">Download All Responses</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends './base.html' %}
+{% load field_type %}
+{% block content %}
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-6">
+                <div class="col-12 text-center mb-3">
+                    <h2>{{ form.title }}</h2>
+                </div>
+                <div class="col-12" id="field__container">
+                    {% for field in fields %}
+                        {% if field|field_type == 'TextField' %}
+                            <div class="field py-2 px-4 mb-3 d-flex" data-type="text_field">
+                                <div class="field__header mr-3">
+                                    <div class="field__order">{{ field.order }}</div>
+                                </div>
+                                <div class="field__body">
+                                    <div class="field__question mb-2">{{ field.question }}</div>
+                                    <div class="field__footer">
+                                        <a href="{% url 'textfield_delete' form_id=form.pk id=field.pk %}" class="btn btn-sm btn-outline-danger">Delete</a>
+                                        <a href="{% url 'textfield_edit' form_id=form.pk id=field.pk %}" class="btn btn-sm btn-outline-dark">Edit</a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% else %}
+                            <div class="field py-2 px-4 mb-3 d-flex" data-type="mcq_field">
+                                <div class="field__header mr-3">
+                                    <div class="field__order">{{ field.order }}</div>
+                                </div>
+                                <div class="field__body">
+                                    <div class="field__question mb-2">{{ field.question }}</div>
+                                    <div class="field__options">
+                                        {% for choice in field.mcqchoicefield_set.all %}
+                                            <div class="field__option mb-1">- {{ choice.text }}</div>
+                                        {% endfor %}
+                                    </div>
+                                    <div class="field__footer">
+                                        <a href="{% url 'mcqfield_delete' form_id=form.pk id=field.pk %}" class="btn btn-sm btn-outline-danger">Delete</a>
+                                        <a href="{% url 'mcqfield_edit' form_id=form.pk id=field.pk %}" class="btn btn-sm btn-outline-dark">Edit</a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="col-12 d-flex justify-content-center mb-3">
+                    <a href="{% url 'textfield_new' id=form.id %}" class="btn btn-outline-dark mr-3">Add Text Field</a>
+                    <a href="{% url 'mcqfield_new' id=form.id %}" class="btn btn-outline-dark">Add MCQ Field</a>
+                </div>
+                <div class="col-12 d-flex justify-content-center">
+                    <a href="{% url 'response_list' id=form.pk %}" class="btn btn-outline-dark mr-3">Responses</a>
+                    <a href="{% url 'form_publish' id=form.pk %}" class="btn btn-outline-dark">Publish</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

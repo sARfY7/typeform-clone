@@ -1,0 +1,29 @@
+{% extends './base.html' %}
+{% block content %}
+    <div class="container d-flex flex-column justify-content-center align-items-center h-fluid-wrapper">
+        <div class="row">
+            <div class="col-12">
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        {% if form.question.errors %}
+                            <label for="" class="form-text">Type your question here...</label>
+                            <input type="text" name="{{ form.question.html_name }}" class="form-control is-invalid" value="{{ form.question.value|default_if_none:'' }}">
+                            {% for error in form.question.errors %}
+                                <div class="error mt-2">{{ error }}</div>
+                            {% endfor %}
+                        {% else %}
+                            <label for="" class="form-text">Type your question here...</label>
+                            <input type="text" name="{{ form.question.html_name }}" class="form-control" value="{{ form.question.value|default_if_none:'' }}">
+                        {% endif %}
+                    </div>
+                    {% if edit_mode %}
+                        <button type="submit" class=" btn btn-block btn-outline-primary">Update Text Field</button>
+                    {% else %}
+                        <button type="submit" class=" btn btn-block btn-outline-primary">Create Text Field</button>
+                    {% endif %}
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

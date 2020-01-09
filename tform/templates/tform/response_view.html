@@ -1,0 +1,40 @@
+{% extends './base.html' %}
+{% load field_type get_response %}
+{% block content %}
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-6">
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <div class="col-12" id="field__container">
+                        {% for field in fields %}
+                            {% if field|field_type == 'TextField' %}
+                                <div class="field py-2 px-4 mb-3 d-flex" data-type="text_field" data-id="{{ field.pk }}">
+                                    <!-- <div class="field__header mr-3">
+                                        <div class="field__order">{{ field.order }}</div>
+                                    </div> -->
+                                    <div class="field__body">
+                                        <div class="field__question mb-2">{{ field.question }}</div>
+                                        <p>- {% get_response field.textfieldresponse_set %}</p>
+                                    </div>
+                                </div>
+                            {% else %}
+                                <div class="field py-2 px-4 mb-3 d-flex" data-type="mcq_field" data-id="{{ field.pk }}">
+                                    <!-- <div class="field__header mr-3">
+                                        <div class="field__order">{{ field.order }}</div>
+                                    </div> -->
+                                    <div class="field__body">
+                                        <div class="field__question mb-2">{{ field.question }}</div>
+                                        <div class="field__options">
+                                            <p>- {% get_response field.mcqfieldresponse_set %}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
