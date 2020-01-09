@@ -1,0 +1,34 @@
+.h-fluid-wrapper {
+    height: 100vh;
+}
+
+.error {
+    color: red;
+}
+
+.tform, .field {
+    box-shadow: rgba(0, 0, 0, 0.08) 0px 2px 4px, rgba(0, 0, 0, 0.06) 0px 2px 12px;
+    border-radius: 4px;
+}
+
+.tform__header {
+    width: 200px;
+    height: 100px;
+}
+
+.field {
+    font-size: 18px;
+}
+
+[contenteditable] {
+  outline: none;
+}
+
+[contenteditable]:hover {
+  cursor: text;
+}
+
+[data-placeholder]:empty:before {
+  content: attr(data-placeholder);
+  color: #888;
+}
