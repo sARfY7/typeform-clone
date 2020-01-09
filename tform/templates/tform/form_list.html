@@ -1,6 +1,22 @@
 {% extends './base.html' %}
 {% block content %}
-    {% for tform in tforms %}
-        <p>tform.title</p>
-    {% endfor %}
-{% endblock }
+    <div class="container my-5">
+        <div class="row">
+            {% for form in forms %}
+                <div class="col-12 col-sm-4 col-md-3 d-flex justify-content-center align-items-center">
+                    <a href="{% url 'form_edit' id=form.id %}">
+                        <div class="tform d-flex flex-column">
+                            <div class="tform__header d-flex justify-content-center align-items-center">
+                                {{ form.title }}
+                            </div>
+                            <div class="tform__footer py-2 d-flex justify-content-center">
+                                <a href="{% url 'form_delete' id=form.pk %}" class="btn btn-sm btn-outline-danger mr-3">Delete</a>
+                                <a href="{% url 'form_view' id=form.pk %}" class="btn btn-sm btn-outline-dark">View</a>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
