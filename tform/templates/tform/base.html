@@ -6,10 +6,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Typeform Clone</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
+    <div class="container mb-5">
+      <div class="row justify-content-center py-3">
+        <div class="col-6">
+          <nav class="nav d-flex justify-content-between">
+            <div class="nav__item">
+              <a href="{% url 'form_list' %}">Home</a>
+            </div>
+            {% if user.is_authenticated %}
+              <div class="nav__item">
+                <a href="{% url 'form_new' %}">Create Form</a>
+              </div>
+              <div class="nav__item"><a href="{% url 'logout' %}">Logout</a></div>
+            {% else %}
+              <div class="nav__item"><a href="{% url 'login' %}">Login</a></div>
+              <div class="nav__item"><a href="{% url 'signup' %}">Signup</a></div>
+            {% endif %}
+          </nav>
+        </div>
+      </div>
+    </div>
     {% block content %}
     {% endblock %}
+
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/jquery.formset.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
 </body>
 </html>
