@@ -10,7 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
-import os
+import os, sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,7 +26,7 @@ SECRET_KEY = '#a&w^26%ph+g%&is2dul%s!7ft6%7r!)p=kgih_d#41(jql3s5'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '192.168.43.237']
 
 
 # Application definition
@@ -48,6 +49,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'typeform.middleware.ErrorCapturingMiddleware'
 ]
 
 ROOT_URLCONF = 'typeform.urls'
@@ -121,3 +123,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 LOGIN_REDIRECT_URL = '/'
+
+X_API_KEY = '2551ca32-3ce1-11ea-9150-58fb8465d81c'
