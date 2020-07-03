@@ -1,0 +1,13 @@
+asgiref==3.2.3
+autopep8==1.4.4
+certifi==2019.11.28
+chardet==3.0.4
+Django==3.0.2
+idna==2.8
+pkg-resources==0.0.0
+pycodestyle==2.5.0
+pytz==2019.3
+requests==2.22.0
+sentry-sdk==0.14.0
+sqlparse==0.3.0
+urllib3==1.25.7
